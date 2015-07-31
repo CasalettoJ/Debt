@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Jake's Debt</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+    <script src="scripts/modules/app.js"></script>
+    <script src="scripts/factories/firebaseExtension.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+</head>
+<body ng-controller="main as m">
+    Initial Debt: ${{m.initialAmount}}
+    Paid Amount: ${{m.paidAmount}}
+    Remaining Amount: ${{m.remainingAmount}}
+    <br>
+    <div>
+        Add payment item:
+        <input type="number" placeholder="0.00" id="paymentAmount" ng-model="m.newPayment.amount" />
+        <br>
+        <input type="text" placeholder="Optional message" id="paymentMessage" ng-model="m.newPayment.note" />
+        <br>
+        <input type="button" value="Add Payment" ng-click="m.addPayment()" />
+    </div>
+    <br><br>Firebase data: <br>
+    <div ng-repeat="item in m.firebase | orderBy:'number':true">
+        Number: {{item.number}} <br>
+        {{item.date}}: {{item.amount}}<br>
+        {{item.note}}<br>
+        <input type="button" ng-click="m.removePayment(item)" value="Delete Payment" />
+    </div>
+</body>
+</html>
