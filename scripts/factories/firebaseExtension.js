@@ -9,7 +9,8 @@
 
     function firebaseExtension($firebaseArray){
         return $firebaseArray.$extend({
-           getTotalPaidAmount: getTotalPaidAmount
+            getTotalPaidAmount: getTotalPaidAmount,
+            getHighestNumber: getHighestNumber
         });
 
         function getTotalPaidAmount(){
@@ -18,6 +19,14 @@
                amount += rec.amount;
             });
             return amount.toFixed(2);
+        }
+
+        function getHighestNumber(){
+            var number = 0;
+            angular.forEach(this.$list, function(rec){
+                number = (rec.number > number) ? rec.number : number;
+            });
+            return number;
         }
     }
 })();

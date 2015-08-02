@@ -45,7 +45,7 @@
             vm.loadingAction = true;
             if(vm.newPayment.amount && vm.newPayment.amount != ''){
                 vm.newPayment.date = new Date().toDateString();
-                vm.newPayment.number = vm.firebase.length+1;
+                vm.newPayment.number = vm.firebase.getHighestNumber() + 1;
                 vm.firebase.$add(vm.newPayment)
                     .then(function(data){
                         console.log("Success adding item.");
