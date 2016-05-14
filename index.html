@@ -16,7 +16,7 @@
     <script src="scripts/controllers/main.js"></script>
 </head>
 <body ng-controller="main as m">
-
+<input type="button" value="Login" ng-click="m.login()" class="btn btn-lg btn-primary" />
 <div class="row">
     <div class="header">
         How Much Does Jake Owe Me? <br>
@@ -35,7 +35,7 @@
         Add Payment:
         <input type="number" placeholder="0.00" id="paymentAmount" ng-model="m.newPayment.amount" class="form-control" />
         <input type="text" placeholder="Optional message" id="paymentMessage" ng-model="m.newPayment.note" class="form-control" />
-        <input type="button" value="Add Payment" ng-click="m.addPayment()" class="btn btn-lg btn-success" style="width:100%"/>
+        <input type="button" value="Add Payment" ng-click="m.addPayment()" class="btn btn-lg btn-success full-width" />
     </div>
 </div>
 <div class="row">
@@ -59,7 +59,7 @@
                 <td>{{item.date}}</td>
                 <td>{{item.amount.toFixed(2)}}</td>
                 <td>{{item.note}}</td>
-                <td><button class="btn btn-sm btn-danger" ng-click="m.removePayment(item)" style="width:100%">Delete Record</button></td>
+                <td><button class="btn btn-sm btn-danger full-width" ng-click="m.removePayment(item)" >Delete Record</button></td>
             </tr>
         </table>
     </div>
