@@ -32,10 +32,10 @@
     </div>
     <div class="col-sm-6 text-center">
         Add Payment:
-        <input type="number" placeholder="0.00" id="paymentAmount" ng-model="m.newPayment.amount" class="form-control" ng-if="m.loggedIn" />
-        <input type="text" placeholder="Optional message" id="paymentMessage" ng-model="m.newPayment.note" class="form-control" ng-if="m.loggedIn" />
-        <input type="button" value="Add Payment" ng-click="m.addPayment()" class="btn btn-lg btn-success full-width" ng-if="m.loggedIn" />
-        <input type="button" value="Login" ng-click="m.login()" class="btn btn-lg btn-primary" ng-if="!m.loggedIn" />
+        <input type="number" placeholder="0.00" id="paymentAmount" ng-model="m.newPayment.amount" class="form-control" ng-show="m.loggedIn" />
+        <input type="text" placeholder="Optional message" id="paymentMessage" ng-model="m.newPayment.note" class="form-control" ng-show="m.loggedIn" />
+        <input type="button" value="Add Payment" ng-click="m.addPayment()" class="btn btn-lg btn-success full-width" ng-show="m.loggedIn" />
+        <input type="button" value="Login" ng-click="m.login()" class="btn btn-lg btn-primary" ng-show="!m.loggedIn" />
         
     </div>
 </div>
