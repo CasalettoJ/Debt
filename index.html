@@ -16,7 +16,6 @@
     <script src="scripts/controllers/main.js"></script>
 </head>
 <body ng-controller="main as m">
-<input type="button" value="Login" ng-click="m.login()" class="btn btn-lg btn-primary" />
 <div class="row">
     <div class="header">
         How Much Does Jake Owe Me? <br>
@@ -33,9 +32,11 @@
     </div>
     <div class="col-sm-6 text-center">
         Add Payment:
-        <input type="number" placeholder="0.00" id="paymentAmount" ng-model="m.newPayment.amount" class="form-control" />
-        <input type="text" placeholder="Optional message" id="paymentMessage" ng-model="m.newPayment.note" class="form-control" />
-        <input type="button" value="Add Payment" ng-click="m.addPayment()" class="btn btn-lg btn-success full-width" />
+        <input type="number" placeholder="0.00" id="paymentAmount" ng-model="m.newPayment.amount" class="form-control" ng-if="m.loggedIn" />
+        <input type="text" placeholder="Optional message" id="paymentMessage" ng-model="m.newPayment.note" class="form-control" ng-if="m.loggedIn" />
+        <input type="button" value="Add Payment" ng-click="m.addPayment()" class="btn btn-lg btn-success full-width" ng-if="m.loggedIn" />
+        <input type="button" value="Login" ng-click="m.login()" class="btn btn-lg btn-primary" ng-if="!m.loggedIn" />
+        
     </div>
 </div>
 <div class="row">
