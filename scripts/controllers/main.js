@@ -24,6 +24,7 @@
         //Function Binding
         vm.addPayment = addPayment;
         vm.removePayment = removePayment;
+        vm.login = login;
 
         //Initialization
         initialize();
@@ -69,6 +70,16 @@
                     console.log("Error removing item: " + error);
                 }).finally(function(){
                     vm.loadingAction = false;
+            });
+        }
+        
+        function login() {
+            firebaseRef.authWithOAuthPopup("github", function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                }
             });
         }
 
