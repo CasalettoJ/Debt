@@ -12,7 +12,6 @@
         //Firebase connection
         var firebaseRef = new Firebase('https://jakesdebt.firebaseIO.com');
         var authData = firebaseRef.getAuth();
-        firebaseRef.onAuth(checkLogin);
         vm.firebase = new firebaseExtension(firebaseRef);
 
         //Models
@@ -85,6 +84,7 @@
                     console.log("Login Failed!", error);
                 } else {
                     console.log("Authenticated successfully with payload:", authData);
+                    vm.loggedIn = true;
                 }
             });
         }
@@ -92,14 +92,6 @@
         function updateAmounts(){
             vm.paidAmount = vm.firebase.getTotalPaidAmount();
             vm.remainingAmount = vm.initialAmount - vm.paidAmount;
-        }
-        
-        function checkLogin(authData) {
-            if (authData) {
-                vm.loggedIn = true;
-            } else {
-                vm.loggedIn = false;
-            }
         }
     }
 
