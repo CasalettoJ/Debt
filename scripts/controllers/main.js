@@ -87,6 +87,7 @@
         }
 
         function updateAmounts(amount){
+            vm.paidAmount = Number(vm.paidAmount);
             if(amount) {
                 vm.paidAmount += amount;
             } else {
