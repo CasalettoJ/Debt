@@ -52,10 +52,11 @@
             if(vm.newPayment.amount && vm.newPayment.amount != ''){
                 vm.newPayment.date = new Date().toDateString();
                 vm.newPayment.number = vm.firebase.getHighestNumber() + 1;
+                var value = vm.newPayment.amount;
                 vm.firebase.$add(vm.newPayment)
                     .then(function(data){
                         console.log("Success adding item.");
-                        updateAmounts();
+                        updateAmounts(value);
                     }, function(error){
                         console.log("Error adding item: " + error);
                     }).finally(function(){
@@ -70,7 +71,7 @@
             vm.firebase.$remove(item)
                 .then(function(data){
                     console.log("Success removing item.");
-                    updateAmounts();
+                    updateAmounts(item.amount * -1);
                 }, function(error){
                     console.log("Error removing item: " + error);
                 }).finally(function(){
@@ -86,9 +87,14 @@
             });
         }
 
-        function updateAmounts(){
-            vm.paidAmount = vm.firebase.getTotalPaidAmount();
-            vm.remainingAmount = vm.initialAmount - vm.paidAmount;
+        function updateAmounts(amount){
+            vm.paidAmount = Number(vm.paidAmount);
+            if(amount) {
+                vm.paidAmount += amount;
+            } else {
+                vm.paidAmount = vm.firebase.getTotalPaidAmount();
+            }
+            vm.remainingAmount = vm.initialAmount - Number(vm.paidAmount);
         }
     }
 
