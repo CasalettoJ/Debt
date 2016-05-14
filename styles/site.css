@@ -3,6 +3,10 @@ body {
     font-family: 'Hind', sans-serif !important;
 }
 
+.full-width {
+    width: 100%;
+}
+
 .header{
     background-color: #27ae60;
     width:100%;
