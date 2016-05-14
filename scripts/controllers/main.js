@@ -11,6 +11,8 @@
 
         //Firebase connection
         var firebaseRef = new Firebase('https://jakesdebt.firebaseIO.com');
+        var authData = firebaseRef.getAuth();
+        firebaseRef.onAuth(checkLogin);
         vm.firebase = new firebaseExtension(firebaseRef);
 
         //Models
@@ -20,6 +22,7 @@
         vm.initialAmount = 2500.00;
         vm.paidAmount = 0.00;
         vm.remainingAmount = vm.initialAmount - vm.paidAmount;
+        vm.loggedIn = false;
 
         //Function Binding
         vm.addPayment = addPayment;
@@ -31,6 +34,9 @@
 
         //Function Definitions
         function initialize() {
+            if(authData) {
+                vm.loggedIn = true;
+            }
             vm.firebase.$loaded()
                 .then(function (data) {
                     console.log("firebase data loaded.");
@@ -86,6 +92,14 @@
         function updateAmounts(){
             vm.paidAmount = vm.firebase.getTotalPaidAmount();
             vm.remainingAmount = vm.initialAmount - vm.paidAmount;
+        }
+        
+        function checkLogin(authData) {
+            if (authData) {
+                vm.loggedIn = true;
+            } else {
+                vm.loggedIn = false;
+            }
         }
     }
 
