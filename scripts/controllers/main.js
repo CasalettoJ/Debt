@@ -55,7 +55,7 @@
                 vm.firebase.$add(vm.newPayment)
                     .then(function(data){
                         console.log("Success adding item.");
-                        updateAmounts();
+                        updateAmounts(vm.newPayment.amount);
                     }, function(error){
                         console.log("Error adding item: " + error);
                     }).finally(function(){
@@ -70,7 +70,7 @@
             vm.firebase.$remove(item)
                 .then(function(data){
                     console.log("Success removing item.");
-                    updateAmounts();
+                    updateAmounts(item.amount * -1);
                 }, function(error){
                     console.log("Error removing item: " + error);
                 }).finally(function(){
@@ -86,8 +86,12 @@
             });
         }
 
-        function updateAmounts(){
-            vm.paidAmount = vm.firebase.getTotalPaidAmount();
+        function updateAmounts(amount){
+            if(amount) {
+                vm.paidAmount += amount;
+            } else {
+                vm.paidAmount = vm.firebase.getTotalPaidAmount();
+            }
             vm.remainingAmount = vm.initialAmount - vm.paidAmount;
         }
     }
