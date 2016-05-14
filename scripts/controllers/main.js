@@ -79,12 +79,9 @@
         }
         
         function login() {
-            firebaseRef.authWithOAuthPopup("github", function(error, authData) {
+            firebaseRef.authWithOAuthRedirect("github", function(error) {
                 if (error) {
                     console.log("Login Failed!", error);
-                } else {
-                    console.log("Authenticated successfully with payload:", authData);
-                    vm.loggedIn = true;
                 }
             });
         }
